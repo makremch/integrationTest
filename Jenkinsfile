@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        
+        stage('build') {
+            steps {
+                sh label: '', script: 'mvn install '
+            }
+        }
+        
+        
         stage('checkout') {
             steps {
                 git 'https://github.com/makremch/integrationTest'
@@ -9,7 +17,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh label: '', script: 'mvn test'
             }
         }
         stage('Deploy') {
